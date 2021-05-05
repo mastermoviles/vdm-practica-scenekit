@@ -1,0 +1,455 @@
+
+
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.4.0">
+    
+    
+      
+        <title>Escena - Práctica extra: SceneKit</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.fe0cca5b.min.css">
+      
+        <link rel="stylesheet" href="assets/stylesheets/palette.a46bcfb3.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#3f51b5">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="stylesheets/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#skybox" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Cabecera">
+    <a href="." title="Práctica extra: SceneKit" class="md-header-nav__button md-logo" aria-label="Práctica extra: SceneKit">
+      
+  <img src="images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Práctica extra: SceneKit
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Escena
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Limpiar" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Práctica extra: SceneKit" class="md-nav__button md-logo" aria-label="Práctica extra: SceneKit">
+      
+  <img src="images/logo.png" alt="logo">
+
+    </a>
+    Práctica extra: SceneKit
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="index.html" title="Introducción" class="md-nav__link">
+      Introducción
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Escena
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="p2a.html" title="Escena" class="md-nav__link md-nav__link--active">
+      Escena
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#skybox" class="md-nav__link">
+    Skybox
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#luces" class="md-nav__link">
+    Luces
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#camara" class="md-nav__link">
+    Cámara
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="p2b.html" title="Ácción" class="md-nav__link">
+      Ácción
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="p2c.html" title="Enemigos" class="md-nav__link">
+      Enemigos
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="p2d.html" title="Estados" class="md-nav__link">
+      Estados
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#skybox" class="md-nav__link">
+    Skybox
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#luces" class="md-nav__link">
+    Luces
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#camara" class="md-nav__link">
+    Cámara
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                  <h1>Escena</h1>
+                
+                <p>Contamos en el proyecto con una escena de nombre <code>ship.scn</code> en la que vemos el modelo de nuestra nave situdada en el origen de coordenadas (0, 0, 0). Vamos a añadir una serie de elementos a dicha escena.</p>
+<h2 id="skybox">Skybox<a class="headerlink" href="#skybox" title="Permanent link">&para;</a></h2>
+<p>El <em>skybox</em> es un cubo con 6 caras mirando hacia su interior que hará el papel del "cielo", permitiéndonos girar en cualquier dirección. Todos los elementos de la escena 3D estarán siempre contenidos dentro de dicho cubo, que veremos como si fuera de tamaño "infinito" (como si fuera el cielo). Vamos a utilizar la imagen <code>galaxy.png</code> como <em>skybox</em> de nuestra escena. </p>
+<blockquote>
+<p><strong>TODO <code>A01</code></strong>: Añadir un <em>skybox</em> a la escena</p>
+<ul>
+<li>En el panel de la escena de <code>ship.scn</code>, en la propiedad <em>Background and Lighting &gt; Background</em>, seleccionaremos <code>galaxy.png</code>, y veremos como esta imagen pasa a ser utilizada como <em>skybox</em> de la escena. Puedes probar a girar la escena para ver el efecto del nuevo cielo que acabamos de añadir. Las propiedades generales de la escena podremos editarlas en el <em>Inspector de la Escena</em>.</li>
+</ul>
+<p><img alt="Inspector de la escena" src="images/p2_inspector_escena.png" />
+</p>
+</blockquote>
+<h2 id="luces">Luces<a class="headerlink" href="#luces" title="Permanent link">&para;</a></h2>
+<p>Deberemos añadir fuentes de luz para iluminar los elementos de la escena. Encontramos diferentes tipos de luces, según si queremos iluminar todos los objetos por igual (luz ambiente) o emitir luz desde diferentes puntos o en diferentes direcciones. Siempre será conveniente contar con algo de luz ambiente para garantizar una iluminación mínima, que simularía la luz general que se produce cuando la luz se refleja en todas las superficies. Vamos a continuación a configurar las luces que utilizaremos en la escena.</p>
+<blockquote>
+<p><strong>TODO <code>A02</code></strong>: Añadir dos luces a la escena:</p>
+<ul>
+<li>Una <strong>luz ambiente</strong>, que ilumine todas las caras por igual, con un color gris oscuro e intensidad 1000. Las propiedades de cada componente de los nodos (como lo es la <em>luz</em>) podrán ser editadas en el <em>Inspector de Atributos</em>.</li>
+</ul>
+<p><img alt="Inspector de atributos" src="images/p2_inspector_atributos.png" /></p>
+<ul>
+<li>Una <strong>luz omni</strong>, que desde la posicion (0, 30, 20) ilumine en todas las direcciones por igual, de color blanco y con intensidad 2500. Para editar la posición de la luz deberemos utilizar el <em>Inspector de Nodo</em> (la posición es una propiedad común de los nodos), mientras que para cambiar las propiedades específicas de la luz utilizaremos el <em>Inspector de Atributos</em>.</li>
+</ul>
+<p><img alt="Inspector de nodos" src="images/p2_inspector_nodo.png" />
+</p>
+</blockquote>
+<p>Comprueba los efectos de la luz en los elementos de la escena. Se recomienda desactivar la opción <em>Default Lighting</em> del editor (panel inferior-derecha del editor) para así previsualizar los efectos reales de las luces que hemos añadido. De no hacerlo, los objetos en el editor aparecerán siempre con un iluminación por defecto, aunque no hubiese puntos de luz, para así permitirnos ver el contenido de la escena. En el juego esa iluminación por defecto no se aplicará. </p>
+<p><img alt="Activación y desactivación de &quot;Default lighting&quot;" src="images/p2_default_lighting.png" /></p>
+<h2 id="camara">Cámara<a class="headerlink" href="#camara" title="Permanent link">&para;</a></h2>
+<p>Necesitaremos añadir una cámara para renderizar la escena desde su punto de vista.</p>
+<blockquote>
+<p><strong>TODO <code>A03</code></strong>: Vamos a añadir una cámara a la escena con las siguientes propiedades:</p>
+<ul>
+<li>El nombre del nodo será <em>camera</em>.</li>
+<li>La posicionaremos en (0, 50, 20)</li>
+<li>La inclinaremos -45 grados en el eje X para que mire hacia la nave, quedando la nave en la parte inferior de la pantalla. </li>
+<li>Modificaremos el plano lejano de la cámara (<em>Z Clipping &gt; Far</em>) y le daremos valor <code>200</code>, para que así se muestren objetos que están más alejados. Lo necesitaremos posteriormente para que las balas y los asteriodes que se encuentran más lejos se sigan viendo. Todo lo que esté a más de <code>200</code> unidades de la cámara no se renderizará.</li>
+</ul>
+</blockquote>
+<p>Puedes visualizar la escena desde el punto de vista de la cámara, para así tener una vista previa de lo que veríamos en pantalla. Para ello seleccionamos la cámara desde el cuadro que encontramos en la parte inferior-izquierda de la escena:</p>
+<p><img alt="Seleccionar punto de vista de la cámara en el editor" src="images/p2_camera.png" /></p>
+<p>En el inspector de atributos del componente cámara, podemos ver algunas propiedades específicas de este componente como por ejemplo <em>Motion Blur Intensity</em>. Por ejemplo, podríamos darle un valor de 0.8 para tener un efecto de <em>motion blur</em> en la escena (prueba a cambiar este valor posteriormente para ver su efecto en el juego).</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Pie">
+        
+          <a href="index.html" title="Introducción" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Anterior
+                </span>
+                Introducción
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="p2b.html" title="Ácción" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Siguiente
+                </span>
+                Ácción
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="assets/javascripts/vendor.d710d30a.min.js"></script>
+      <script src="assets/javascripts/bundle.b39636ac.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copiar al portapapeles", "clipboard.copied": "Copiado al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados"}</script>
+      
+      <script>
+        app = initialize({
+          base: ".",
+          features: [],
+          search: Object.assign({
+            worker: "assets/javascripts/worker/search.a68abb33.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

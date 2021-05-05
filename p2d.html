@@ -1,0 +1,540 @@
+
+
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.4.0">
+    
+    
+      
+        <title>Estados - Práctica extra: SceneKit</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.fe0cca5b.min.css">
+      
+        <link rel="stylesheet" href="assets/stylesheets/palette.a46bcfb3.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#3f51b5">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="stylesheets/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#maquina-de-estados" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Cabecera">
+    <a href="." title="Práctica extra: SceneKit" class="md-header-nav__button md-logo" aria-label="Práctica extra: SceneKit">
+      
+  <img src="images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Práctica extra: SceneKit
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Estados
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Limpiar" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Práctica extra: SceneKit" class="md-nav__button md-logo" aria-label="Práctica extra: SceneKit">
+      
+  <img src="images/logo.png" alt="logo">
+
+    </a>
+    Práctica extra: SceneKit
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="index.html" title="Introducción" class="md-nav__link">
+      Introducción
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="p2a.html" title="Escena" class="md-nav__link">
+      Escena
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="p2b.html" title="Ácción" class="md-nav__link">
+      Ácción
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="p2c.html" title="Enemigos" class="md-nav__link">
+      Enemigos
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Estados
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="p2d.html" title="Estados" class="md-nav__link md-nav__link--active">
+      Estados
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#maquina-de-estados" class="md-nav__link">
+    Máquina de estados
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-la-pantalla-de-titulo" class="md-nav__link">
+    Configuración de la pantalla de título
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-la-pantalla-de-game-over" class="md-nav__link">
+    Configuración de la pantalla de Game Over
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transiciones-entre-estados" class="md-nav__link">
+    Transiciones entre estados
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#maquina-de-estados" class="md-nav__link">
+    Máquina de estados
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-la-pantalla-de-titulo" class="md-nav__link">
+    Configuración de la pantalla de título
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-la-pantalla-de-game-over" class="md-nav__link">
+    Configuración de la pantalla de Game Over
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transiciones-entre-estados" class="md-nav__link">
+    Transiciones entre estados
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                  <h1>Estados</h1>
+                
+                <p>Vamos a definir 4 diferentes estados en los que podrá estar nuestro juego:</p>
+<ul>
+<li><code>Title</code>: Muestra la pantalla de título, haciendo <em>tap</em> sobre la pantalla pasaremos al estado <code>Introduction</code></li>
+<li><code>Introduction</code>: La nave aparecerá desde la parte interior de la pantalla hasta ocupar su posición en el juego, pero todavía no será manejable. Una vez llegue a su posición en la escena (0, 0, 0), se pasará al estado <code>Playing</code>.</li>
+<li><code>Playing</code>: En este estado podremos manejar la nave, moviendola lateralmente o disparando. Cuando un proyectil impacte contra nosotros, pasaremos al estado <code>GameOver</code></li>
+<li><code>GameOver</code>: Mostrará la pantalla de <em>Game Over</em> indicando el número de asteroides que hemos destruido durante 3 segundos, y volverá a la pantalla de título.</li>
+</ul>
+<p>En lugar de definir diferentes escenas para cada estado, vamos a utilizar una única escena e implementar dentro de ella la máquina de estados.</p>
+<h2 id="maquina-de-estados">Máquina de estados<a class="headerlink" href="#maquina-de-estados" title="Permanent link">&para;</a></h2>
+<p>El videojuego se comportará como una máquina de estados. Para ello haremos lo siguiente:</p>
+<blockquote>
+<p><strong><em>TODO <code>D01</code></em></strong></p>
+<ul>
+<li>Definiremos en <code>GameViewController</code> una enumeración <code>GameState</code> con los estados anteriores</li>
+</ul>
+<p><strong><em>TODO <code>D02</code></em></strong></p>
+<ul>
+<li>Incluiremos en la clase un campo <code>gameState</code> de tipo <code>GameState</code> donde indicaremos el estado actual del juego, que inicialmente será <code>Title</code></li>
+</ul>
+</blockquote>
+<p>Según el estado en el que estemos, mostraremos un contenido u otro en la escena, y permitiremos realizar determinadas acciones u otra. Por ejemplo, sólo deberían aparecer asteroides y deberíamos poder manejar la nave si estamos en estado <code>Playing</code>. Para ello haremos las siguientes modificaciones:</p>
+<blockquote>
+<p><strong><em>TODO <code>D03</code></em></strong></p>
+<ul>
+<li>En <code>renderer(:, updateAtTime:)</code> sólo generaremos asteroides y moveremos la nave si el estado actual es <code>Playing</code>. </li>
+</ul>
+<p><strong><em>TODO <code>D04</code></em></strong></p>
+<ul>
+<li>En <code>handleTap(:)</code> sólo dispararemos si estamos en estado <code>Playing</code>.</li>
+</ul>
+</blockquote>
+<p>Vamos a definir ahora el contenido del resto de estados. Para simplificar la gestión de los estados, vamos a crear en la escena <code>ship.scn</code> dos nodos donde agruparemos todo el contenido a mostrar en los estados <code>Title</code> y <code>GameOver</code>, de forma que oculatando o mostrando dicho nodos podremos mostrar u ocultar todo el contenido de dichos estados. </p>
+<blockquote>
+<p><strong><em>TODO <code>D05</code></em></strong></p>
+<ul>
+<li>Crearemos en la escena <code>ship.scn</code> dos nodos vacíos con los siguientes nombres:</li>
+<li><code>titleGroup</code></li>
+<li><code>gameOverGroup</code></li>
+<li>Dado que estos nodos básicamente contendrán texto 3D frente a la cámara, <strong>los incluiremos como hijos del nodo cámara</strong> para que así siempre se muestren frente a ésta, aunque la movamos de posición o la rotemos. </li>
+<li>Dentro del nodo cámara, los ubicaremos en las coordenadas <code>(0, 0, -100)</code>, para que así estén <code>100</code> unidades frente a la cámara (la cámara por defecto mira hacia su eje Z negativo).</li>
+</ul>
+</blockquote>
+<p>En los siguientes apartados daremos contenido a cada uno de estos estados.</p>
+<h2 id="configuracion-de-la-pantalla-de-titulo">Configuración de la pantalla de título<a class="headerlink" href="#configuracion-de-la-pantalla-de-titulo" title="Permanent link">&para;</a></h2>
+<p>Vamos a crear en el editor de la escena el contenido de la pantalla de título. Mostramos a continuación, a modo orientativo, un ejemplo de cómo podría quedar:</p>
+<p><img alt="Pantalla de título" src="images/p2_title.png" /></p>
+<blockquote>
+<p><strong><em>TODO <code>D06</code></em></strong></p>
+<ul>
+<li>En la pantalla de título (dentro del nodo <code>titleGroup</code>) mostraremos texto 3D con el título del juego (por ejemplo <em>Space Master 2020</em>) y un texto que indique <em>Tap to start</em>, de forma similar a la imagen anterior </li>
+</ul>
+</blockquote>
+<p><strong>Consejo</strong>: Para editar los nodos de <em>título</em> y <em>game over</em> es recomendable que en el editor de la escena seleccionemos el punto de vista <code>camera</code> (esquina inferior-izquierda del editor de la escena). De esta forma, mientras editamos veremos lo que estaría viendo la cámara, y por lo tanto lo que se mostrará en el juego.</p>
+<p><img alt="Selección del punto de vista de la cámara en el editor" src="images/p2_camera.png" /></p>
+<h2 id="configuracion-de-la-pantalla-de-game-over">Configuración de la pantalla de <em>Game Over</em><a class="headerlink" href="#configuracion-de-la-pantalla-de-game-over" title="Permanent link">&para;</a></h2>
+<p>La pantalla de <em>Game Over</em> deberá tener un aspecto similar al siguiente:</p>
+<p><img alt="Pantalla de título" src="images/p2_game_over.png" /></p>
+<blockquote>
+<p><strong><em>TODO <code>D07</code></em></strong></p>
+<ul>
+<li>En esta pantalla (<code>gameOverGroup</code>) mostraremos el texto <em>Game Over</em>, y además otro texto que nos indique <em>X asteroids destroyed</em>. </li>
+<li>Esta última cadena de texto deberá ser identificada con el nombre <code>gameOverResultsText</code> que nos permita obtener una referencia a ella desde el juego.</li>
+</ul>
+</blockquote>
+<p>Ahora deberemos obtener referencias desde el código a los nodos que acabamos de crear, para así poder mostrarlos u ocultarlos cuando sea necesario.</p>
+<blockquote>
+<p><strong><em>TODO <code>D08</code></em></strong></p>
+<ul>
+<li>Dentro del método <code>viewDidLoad</code> obtendremos referencias a los nodos <code>titleGroup</code>, <code>gameOverGroup</code>  y <code>GameOverResultsText</code>. </li>
+<li>Para localizar dichos nodos, ¿deberemos hacer la búsqueda recursiva? Si no queremos que la búsqueda sea recursiva, ¿desde qué nodo deberemos buscarlos?</li>
+</ul>
+</blockquote>
+<h2 id="transiciones-entre-estados">Transiciones entre estados<a class="headerlink" href="#transiciones-entre-estados" title="Permanent link">&para;</a></h2>
+<p>Encontramos los siguientes métodos con los que vamos a gestionar las transiciones entre los estados del juego:</p>
+<ul>
+<li><code>startGame()</code>: Transición del estado <code>Title</code> a <code>Introduction</code>, que automáticamente dará paso a <code>Playing</code>.</li>
+<li><code>showGameOver()</code>: Transición del estado <code>Playing</code> a <code>GameOver</code> (cuando nos matan)</li>
+<li><code>showTitle()</code>: Transición del estado <code>GameOver</code> a <code>Title</code>.</li>
+</ul>
+<p>Vamos a implementar el contenido de dichos métodos como se indica a continuación:</p>
+<blockquote>
+<p><strong><em>TODO <code>D09</code></em></strong> </p>
+<ul>
+<li>Introducimos código en <code>showTitle()</code> para hacer lo siguiente:</li>
+<li>Cambiamos el estado a <code>Title</code></li>
+<li>Mostramos el nodo <code>titleGroup</code> (propiedad <code>isHidden</code>)</li>
+<li>Ocultamos el nodo <code>gameOverGroup</code></li>
+<li>Ocultamos el HUD</li>
+<li>Ocultamos la nave (<code>ship</code>)</li>
+</ul>
+</blockquote>
+<p>Podemos observar que al final del método <code>viewDidLoad()</code> se llama a <code>showTitle()</code>, por lo que si ejecutamos el juego ahora, deberá mostrarse la escena de título inicialmente.</p>
+<blockquote>
+<p><strong><em>TODO <code>D10</code></em></strong> </p>
+<ul>
+<li>Introducimos código en <code>startGame()</code>  para hacer lo siguiente:</li>
+<li>Cambiamos el estado (<code>gameState</code>) a <code>Introduction</code></li>
+<li>Ocultamos <code>titleGroup</code> (propiedad <code>isHidden</code>)</li>
+<li>Mostramos el HUD</li>
+<li>Mostramos la nave (<code>ship</code>)</li>
+<li>Ponemos a '0' el contador <code>numAsteroides</code> y ponemos como cadena vacía "" el texto de <code>marcadorAsteroides</code></li>
+<li>Inicializamos la posición de la nave en <code>(0, 50, 50)</code>, tras la cámara</li>
+<li>Ejecutamos una acción que mueva la nave a la posición <code>(0, 0, 0)</code> en un segundo. Una vez en dicha posición cambiamos el estado a <code>Playing</code> (puede utilizar acciones de tipo <code>sequence</code>, <code>move</code> y <code>run</code>, ver <a href="https://developer.apple.com/documentation/scenekit/scnaction">documentación de <code>SCNAction</code></a>).</li>
+</ul>
+<p><strong><em>TODO <code>D11</code></em></strong> </p>
+<ul>
+<li>Vamos ahora a añadir en <code>handleTap(:)</code> código para que en caso de estar en estado <code>Title</code>, al hacer <em>tap</em> se llame a <code>startGame()</code>. </li>
+<li>De esta forma, si probamos ahora el juego veremos que ya podremos comenzar la partida haciendo <em>tap</em> en la escena de título.</li>
+</ul>
+<p><strong><em>TODO <code>D12</code></em></strong> </p>
+<ul>
+<li>Introducimos código en <code>showGameOver()</code> para hacer lo siguiente:</li>
+<li>Cambiamos el estado a <code>GameOver</code></li>
+<li>Ocultamos el HUD</li>
+<li>Mostramos el nodo <code>gameOverGroup</code></li>
+<li>Ponemos en <code>gameOverResultsText</code> el texto "<em>X</em> ASTEROIDS DESTROYED", sustituyendo <em>X</em> por el valor correcto.</li>
+<li>Inicializamos la posición de <code>gameOverGroup</code> en <code>(0, 0, 0)</code></li>
+<li>Inicializamos la opacidad de <code>gameOverGroup</code> a <code>1</code> (opaco)</li>
+<li>Ejecutamos una acción que mueva <code>gameOverGroup</code> a (0, 0, -200) en 2 segundos, utilizando un modificador de tiempo <code>easeOut</code> (ver propiedad <a href="https://developer.apple.com/documentation/scenekit/scnaction/1524055-timingmode"><code>timingMode</code></a> de <code>SCNAction</code>), y tras ello haga un <em>fadeout</em> del nodo en 0.5 segundos y llame a <code>showTitle()</code> para volver al titulo.</li>
+</ul>
+<p><strong><em>TODO <code>D13</code></em></strong> </p>
+<ul>
+<li>En el método <code>destroyShip(: , withAsteroid:)</code> llamaremos al método <code>showGameOver()</code>, para que cuando un asteroide impacte contra nuestra nave pasemos a la pantalla de <em>Game Over</em>. </li>
+</ul>
+</blockquote>
+<p>Con esto habremos implementado todas las transiciones entre estados. Podemos probar el juego y ver cómo realiza las transiciones entre estados: <code>Title</code> - <code>Introduction</code> - <code>Playing</code> -  <code>GameOver</code> - <code>Title</code>.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Pie">
+        
+          <a href="p2c.html" title="Enemigos" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Anterior
+                </span>
+                Enemigos
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="assets/javascripts/vendor.d710d30a.min.js"></script>
+      <script src="assets/javascripts/bundle.b39636ac.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copiar al portapapeles", "clipboard.copied": "Copiado al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados"}</script>
+      
+      <script>
+        app = initialize({
+          base: ".",
+          features: [],
+          search: Object.assign({
+            worker: "assets/javascripts/worker/search.a68abb33.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

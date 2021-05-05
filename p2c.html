@@ -1,0 +1,692 @@
+
+
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.4.0">
+    
+    
+      
+        <title>Enemigos - Práctica extra: SceneKit</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.fe0cca5b.min.css">
+      
+        <link rel="stylesheet" href="assets/stylesheets/palette.a46bcfb3.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#3f51b5">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="stylesheets/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#generacion-de-asteroides" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Cabecera">
+    <a href="." title="Práctica extra: SceneKit" class="md-header-nav__button md-logo" aria-label="Práctica extra: SceneKit">
+      
+  <img src="images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Práctica extra: SceneKit
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Enemigos
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Limpiar" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Práctica extra: SceneKit" class="md-nav__button md-logo" aria-label="Práctica extra: SceneKit">
+      
+  <img src="images/logo.png" alt="logo">
+
+    </a>
+    Práctica extra: SceneKit
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="index.html" title="Introducción" class="md-nav__link">
+      Introducción
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="p2a.html" title="Escena" class="md-nav__link">
+      Escena
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="p2b.html" title="Ácción" class="md-nav__link">
+      Ácción
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Enemigos
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="p2c.html" title="Enemigos" class="md-nav__link md-nav__link--active">
+      Enemigos
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#generacion-de-asteroides" class="md-nav__link">
+    Generación de asteroides
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#colisiones" class="md-nav__link">
+    Colisiones
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#efectos-de-particulas" class="md-nav__link">
+    Efectos de partículas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#marcadores" class="md-nav__link">
+    Marcadores
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#audio" class="md-nav__link">
+    Audio
+  </a>
+  
+    <nav class="md-nav" aria-label="Audio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#musica-de-fondo" class="md-nav__link">
+    Música de fondo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#efectos-de-sonido" class="md-nav__link">
+    Efectos de sonido
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="p2d.html" title="Estados" class="md-nav__link">
+      Estados
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#generacion-de-asteroides" class="md-nav__link">
+    Generación de asteroides
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#colisiones" class="md-nav__link">
+    Colisiones
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#efectos-de-particulas" class="md-nav__link">
+    Efectos de partículas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#marcadores" class="md-nav__link">
+    Marcadores
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#audio" class="md-nav__link">
+    Audio
+  </a>
+  
+    <nav class="md-nav" aria-label="Audio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#musica-de-fondo" class="md-nav__link">
+    Música de fondo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#efectos-de-sonido" class="md-nav__link">
+    Efectos de sonido
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                  <h1>Enemigos</h1>
+                
+                <p>En este apartado vamos a añadir "peligros" al videojuego, e interactuar con ellos. Concretamente, estos peligros serán asteroides que deberemos evitar y destruir.</p>
+<h2 id="generacion-de-asteroides">Generación de asteroides<a class="headerlink" href="#generacion-de-asteroides" title="Permanent link">&para;</a></h2>
+<p>Vamos a tener que generar un gran número de asteroides en la parte superior de la pantalla, en una posición X aleatoria, y haremos que vengan hacia nosotros. Dado que tendremos que generar múltiples asteroides "iguales", lo primero que haremos será crear un modelo general de "asteroide", y lo clonaremos cada vez que queramos que aparezca un nuevo asteroide. </p>
+<blockquote>
+<p><strong><em>TODO <code>C01</code></em></strong></p>
+<ul>
+<li>En <em>rock.scn</em> tenemos un modelo 3D de asteroide creado, con nombre de nodo <em>"asteroid"</em>. </li>
+<li>Vamos a cargar este modelo en nuestro código dentro del método <code>setupAsteroids(forView:)</code>. </li>
+<li>Para ello podemos utilizar el siguiente código:</li>
+</ul>
+<p><div class="highlight"><pre><span></span><code><span class="kd">let</span> <span class="nv">asteroidScene</span> <span class="p">=</span> 
+    <span class="bp">SCNScene</span><span class="p">(</span><span class="n">named</span><span class="p">:</span> <span class="s">&quot;art.scnassets/rock.scn&quot;</span><span class="p">)</span>
+<span class="kc">self</span><span class="p">.</span><span class="n">asteroidModel</span> <span class="p">=</span> <span class="n">asteroidScene</span><span class="p">?.</span><span class="n">rootNode</span>
+    <span class="p">.</span><span class="n">childNode</span><span class="p">(</span><span class="n">withName</span><span class="p">:</span> <span class="s">&quot;asteroid&quot;</span><span class="p">,</span> 
+               <span class="n">recursively</span><span class="p">:</span> <span class="kc">false</span><span class="p">)</span>
+<span class="n">view</span><span class="p">.</span><span class="n">prepare</span><span class="p">(</span><span class="kc">self</span><span class="p">.</span><span class="n">asteroidModel</span><span class="p">!,</span> 
+             <span class="n">shouldAbortBlock</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+</code></pre></div>
+</p>
+</blockquote>
+<p>¿Qué hace el método <code>prepare</code>? Consulta su documentación, y prueba a ejecutar el juego llamándolo y sin llamarlo. ¿Qué ocurre?</p>
+<p>Una vez precargado el modelo de asteroide, se llamará al método <code>spawnAsteroid(:)</code> para clonar dicho modelo cada vez que queramos que aparezca (<em>spawn</em>) un asteroide nuevo (a la generación de objetos y personajes en determinados puntos de la escena se le denomina <em>spawn</em>). </p>
+<blockquote>
+<p><strong><em>TODO <code>C02</code></em></strong></p>
+<ul>
+<li>En el método <code>spawnAsteroid(:)</code>, podemos generar un nuevo asteroide de la siguiente forma:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="kd">let</span> <span class="nv">asteroid</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">asteroidModel</span><span class="p">?.</span><span class="n">clone</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Añadir a la escena e inicializar propiedades del clon</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<ul>
+<li>Dentro de dicho bloque de código deberemos:</li>
+<li>Añadir el asteroide como hijo a la escena (al mismo nodo raíz).</li>
+<li>Ubicarlo en la posición que nos llega como parámetro.</li>
+<li>Programar una acción que haga que se desplace hasta la parte inferior de los límites (<code>limits</code>) en la misma coordenada X donde se ha generado.</li>
+<li>Hacer que al mismo tiempo el asteroide rote sobre si mismo, sobre un eje de rotación aleatorio.<ul>
+<li><strong>Ayuda</strong>. Encontrarás en el proyecto (grupo <em>Utils</em>) una extensión de la clase <code>SCNVector3</code> que te facilitará la generación de vectores aleatorios para el eje de giro.</li>
+</ul>
+</li>
+<li>Una vez llegue a la posición final, el asteroide deberá ser eliminado de la escena (programar esto mediente la <em>acción</em> adecuada).</li>
+</ul>
+</blockquote>
+<p>Por último, nos queda utilizar  el método anterior para generar asteroides en la escena . Haremos que se generen en la parte superior de la pantalla, en una coordenada X aleatoria, cada cierto intervalo de tiempo. Contamos con los campos <code>spawnInterval</code> y <code>timeToSpawn</code> para controlar la periodicidad de la generación de asteroides.</p>
+<blockquote>
+<p><strong><em>TODO <code>C03</code></em></strong></p>
+<ul>
+<li>En <code>renderer(_:,updateAtTime:)</code> descontamos el valor  <em>delta time</em> de <code>timeToSpawn</code>.</li>
+<li>Cuando <code>timeToSpawn</code> llegue a 0, generamos un nuevo asteroide y reestablecemos el valor de <code>timeToSpawn</code> a <code>spawnInterval</code>.</li>
+<li>El asteroide debe generarse en una posicion x aleatoria entre los limites de la escena (<code>limits.minX</code> y <code>limits.maxX</code>), Y=<code>0</code>, y Z=<code>limits.minY</code>.</li>
+<li><strong>Ayuda</strong>. Encontrarás en el proyecto (grupo <em>Utils</em>) una extensión de la clase <code>Float</code> que te facilitará la generación de valores aleatorios.</li>
+</ul>
+</blockquote>
+<h2 id="colisiones">Colisiones<a class="headerlink" href="#colisiones" title="Permanent link">&para;</a></h2>
+<p>Necesitamos calcular las colisiones producidas entre:
+- Asteroides y disparos 
+- Asteroides y nuestra nave</p>
+<p>Definiremos las categorías de cada cuerpo físico de la siguiente forma:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span> <span class="nv">categoryMaskShip</span> <span class="p">=</span>     <span class="mb">0b001</span> <span class="c1">// (1)</span>
+<span class="kd">let</span> <span class="nv">categoryMaskShot</span> <span class="p">=</span>     <span class="mb">0b010</span> <span class="c1">// (2)</span>
+<span class="kd">let</span> <span class="nv">categoryMaskAsteroid</span> <span class="p">=</span> <span class="mb">0b100</span> <span class="c1">// (4)</span>
+</code></pre></div>
+
+<blockquote>
+<p><strong><em>TODO <code>C04</code></em></strong></p>
+<ul>
+<li>Crea cuerpos físicos de tipo <em>kinematic</em> para la nave (<code>ship</code>) dentro de <code>ship.scn</code>, y para el asteroide (<code>asteroid</code>) dentro de <code>rock.scn</code>, asignando la categoría correcta en cada caso. Puedes utilizar el panel de físicas del editor. Ambos deben tener forma física (<em>Physics shape</em>) esférica, ajustando la escala de la esfera al tamaño del modelo aproximadamente. </li>
+<li>
+<p><strong>Ayuda</strong>. En la parte inferior-derecha de la escena vemos el desplegable <em>Display options</em>, dentro del cual podemos activar la opción <em>Visibility &gt; Physics</em>, que nos permitirá previsualizar la forma física de los objetos. Estos nos facilitará ajustar la forma física de forma correcta.</p>
+<p><img alt="Modificar las _display options_ del editor" src="images/p2_display_options.png" /></p>
+</li>
+<li>
+<p><strong>Recomendación</strong>: Es conveniente que la forma física para las colisiones sea algo inferior al tamaño visual de los objetos, ya que lo más frustrante para el jugador es que un asteoide "mate" a nuestra nave sólo con "rozarla".</p>
+</li>
+</ul>
+<p><strong><em>TODO <code>C05</code></em></strong></p>
+<ul>
+<li>En el método <code>shot</code>, haz que las balas generadas tengan un cuerpo físico con las siguientes propiedades:</li>
+<li>Tipo <code>kinematic</code></li>
+<li>Forma esfera con radio <code>1.0</code></li>
+<li>Máscara de categoría indicada anteriormente</li>
+<li>¿Qué máscara de contacto deberían tener los asteroides en vista de las categorías de cada entidad? Asigna la máscara de contacto correcta en el nodo <code>asteroid</code> dentro de <em>rock.scn</em>.</li>
+</ul>
+</blockquote>
+<p>Por último, necesitaremos recibir una notificación de los eventos de contacto entre cuerpos, para saber cuándo debemos destruir un asteroide o la nave. Para ello deberemos implementar un <em>delegado</em> que reciba estas notificaciones.</p>
+<blockquote>
+<p><strong><em>TODO <code>C06</code></em></strong></p>
+<ul>
+<li>Implementaremos el protocolo <code>SCNPhysicsContactDelegate</code> en la clase</li>
+</ul>
+<p><strong><em>TODO <code>C07</code></em></strong></p>
+<ul>
+<li>Al final de <code>viewDidLoad</code>, hacemos que nuestra clase (<code>self</code>) sea el <code>contactDelegate</code> del mundo físico de la escena <code>SCNScene</code>.</li>
+</ul>
+<p><strong><em>TODO <code>C08</code></em></strong></p>
+<ul>
+<li>Implementamos el método <code>physicsWorld(:, didBegin:)</code>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span> <span class="nf">physicsWorld</span><span class="p">(</span><span class="kc">_</span> <span class="n">world</span><span class="p">:</span> <span class="bp">SCNPhysicsWorld</span><span class="p">,</span> 
+                  <span class="n">didBegin</span> <span class="n">contact</span><span class="p">:</span> <span class="bp">SCNPhysicsContact</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<ul>
+<li>Introduciremos el código que haga que cuando se detecte la colisión de un asteroide con la nave, se llame a <code>destroyShip(:,withAsteroid:)</code>, y que cuando se detecta una colisión entre una bala y un asteroide se llame a <code>destroyAsteroid(:,withBullet:)</code>. A continuación se sugiere una forma de organizar el código para hacer esta comprobación:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span> <span class="nf">onContact</span><span class="p">(</span><span class="n">asteroid</span><span class="p">:</span> <span class="bp">SCNNode</span><span class="p">,</span> <span class="n">toNode</span> <span class="n">node</span><span class="p">:</span> <span class="bp">SCNNode</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">name</span> <span class="p">==</span> <span class="s">&quot;ship&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">destroyShip</span><span class="p">(</span><span class="n">ship</span><span class="p">:</span> <span class="n">node</span><span class="p">,</span> <span class="n">withAsteroid</span><span class="p">:</span> <span class="n">asteroid</span><span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">name</span> <span class="p">==</span> <span class="s">&quot;bullet&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">destroyAsteroid</span><span class="p">(</span><span class="n">asteroid</span><span class="p">:</span> <span class="n">asteroid</span><span class="p">,</span> <span class="n">withBullet</span><span class="p">:</span> <span class="n">node</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">physicsWorld</span><span class="p">(</span><span class="kc">_</span> <span class="n">world</span><span class="p">:</span> <span class="bp">SCNPhysicsWorld</span><span class="p">,</span> 
+             <span class="n">didBegin</span> <span class="n">contact</span><span class="p">:</span> <span class="bp">SCNPhysicsContact</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">contact</span><span class="p">.</span><span class="n">nodeA</span><span class="p">.</span><span class="n">name</span> <span class="p">==</span> <span class="s">&quot;asteroid&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">onContact</span><span class="p">(</span><span class="n">asteroid</span><span class="p">:</span> <span class="n">contact</span><span class="p">.</span><span class="n">nodeA</span><span class="p">,</span> 
+                  <span class="n">toNode</span><span class="p">:</span> <span class="n">contact</span><span class="p">.</span><span class="n">nodeB</span><span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">contact</span><span class="p">.</span><span class="n">nodeB</span><span class="p">.</span><span class="n">name</span> <span class="p">==</span> <span class="s">&quot;asteroid&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">onContact</span><span class="p">(</span><span class="n">asteroid</span><span class="p">:</span> <span class="n">contact</span><span class="p">.</span><span class="n">nodeB</span><span class="p">,</span> 
+                  <span class="n">toNode</span><span class="p">:</span> <span class="n">contact</span><span class="p">.</span><span class="n">nodeA</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<ul>
+<li><strong>Nota</strong>. El orden en el que pueden venir los nodos que participan en el contacto es arbitrario (<code>nodeA</code> y <code>nodeB</code>), por ello en el código anterior se han contemplado las dos posibilidades. </li>
+</ul>
+</blockquote>
+<p>Una vez detectados los contactos, faltaría programar sus efectos:</p>
+<blockquote>
+<p><strong><em>TODO <code>C09</code></em></strong></p>
+<ul>
+<li>En <code>destroyAsteroid(:,withBullet:)</code> eliminamos tanto el nodo del asteroide como el de la bala de la escena (consulta el método <a href="https://developer.apple.com/documentation/scenekit/scnnode/1407991-removefromparentnode"><code>removeFromParentNode</code></a>).</li>
+</ul>
+<p><strong><em>TODO <code>C10</code></em></strong></p>
+<ul>
+<li>En <code>destroyShip(:,withAsteroid:)</code> eliminamos el asteroide de la escena, y haz que la nave salga despedida hacia atrás rotando (por ejemplo, que se desplace a <code>(0, 50, 50)</code> al mismo tiempo que rota <code>6.3</code> radianes, a lo largo de un segundo, utilizando las acciones adecuadas).</li>
+</ul>
+</blockquote>
+<h2 id="efectos-de-particulas">Efectos de partículas<a class="headerlink" href="#efectos-de-particulas" title="Permanent link">&para;</a></h2>
+<p>Vamos a hacer que cuando un asteroide se destruya, se muestre un efecto de partículas como explosión. Contamos en el proyecto con el efecto <code>Explode.scnp</code>. Puedes previsualizar el efecto en el editor, y modificar sus propiedades de forma opcional. Haremos lo siguiente:</p>
+<blockquote>
+<p><strong><em>TODO <code>C11</code></em></strong></p>
+<ul>
+<li>En <code>viewDidLoad</code> cargamos el efecto de partículas utilizando la clase <code>SCNParticleSystem</code> y lo asignamos al campo <code>explode</code>.</li>
+</ul>
+<p><strong><em>TODO <code>C12</code></em></strong></p>
+<ul>
+<li>En <code>showExplosion(onNode:)</code> reproduciremos el efecto de partícula <code>explode</code> en la posición 3D donde estuviese el nodo que nos llegará por parámetro. Esto lo haremos con el método <code>addParticleSystem</code> de <code>SCNScene</code>.</li>
+</ul>
+</blockquote>
+<p>Comprueba que al disparar sobre un asteroide se muestra la explosión.</p>
+<h2 id="marcadores">Marcadores<a class="headerlink" href="#marcadores" title="Permanent link">&para;</a></h2>
+<p>Una forma sencilla de crear el HUD del juego (puntuación, vidas restantes, etc) es superponer sobre la vista una capa definida como escena de SpriteKit. Para ello simplemente deberemos asignar un objeto de tipo <code>SKScene</code> a la propiedad <code>overlaySKScene</code> de nuestro <code>SCNSceneRenderer</code> (en nuestro caso el <em>renderer</em> será la vista <code>SCNView</code>).</p>
+<blockquote>
+<p><strong><em>TODO <code>C13</code></em></strong></p>
+<ul>
+<li>Configuraremos el HUD en <code>setupHUD()</code>, siguiendo los pasos que se indican a continuación.</li>
+<li>Creamos, de forma programática, un <code>SKScene</code> en blanco con las mismas dimensiones de nuestra vista <code>SCNView</code>.</li>
+<li>Creamos una etiqueta <code>SKLabelNode</code>, inicialmente con la cadena <em>"0 HITS"</em>, con las siguientes características:</li>
+<li>Fuente <em>University</em> de tamaño 36 y color naranja (<code>UIColor.orange</code>).</li>
+<li>Hacemos que la etiqueta de texto se alinee verticalmente con su parte superior (consultar las <a href="https://developer.apple.com/documentation/spritekit/sklabelnode">propiedades de <code>SKLabelNode</code> en la documentación</a>).</li>
+<li>Situar la etiqueta en la parte superior de la pantalla, y centrada.</li>
+<li>Añade la etiqueta como nodo hijo al HUD (a la <code>SKScene</code>).</li>
+<li>Asigna la etiqueta a la propiedad <code>marcadorAsteroides</code> de la clase.</li>
+<li>Asigna la escena a la propiedad <code>hud</code> de la clase.</li>
+<li>Tal como está configurado hasta ahora, ¿qué ocurre con los dispositivos iPhone de serie X? Utiliza la <a href="https://developer.apple.com/documentation/uikit/uiview/2891103-safeareainsets">propiedad <code>safeAreaInsets</code></a> de la vista (en nuestro caso <code>SCNView</code>) para solucionar el problema. </li>
+</ul>
+</blockquote>
+<p>Una vez contamos con el HUD y con un marcador de puntuación en él, nos queda incrementar la puntuación cada vez que destruimos un asteroide.</p>
+<blockquote>
+<p><strong><em>TODO <code>C14</code></em></strong></p>
+<ul>
+<li>En <code>destroyAsteroid(:,withBullet:)</code> incrementa el contador de asteroides destruidos de la clase (<code>numAsteroides</code>).</li>
+<li>A continuación actualiza el marcador <code>marcadorAsteroides</code> con una cadena del tipo <em>"X HITS"</em>, donde <em>X</em> será el número de asteroides que llevamos destruidos. </li>
+</ul>
+</blockquote>
+<p>Comprueba que el marcador funciona correctamente.</p>
+<h2 id="audio">Audio<a class="headerlink" href="#audio" title="Permanent link">&para;</a></h2>
+<p>Vamos ahora a incluir música de fondo y efectos de sonido en el videojuego. </p>
+<h3 id="musica-de-fondo">Música de fondo<a class="headerlink" href="#musica-de-fondo" title="Permanent link">&para;</a></h3>
+<p>La música sonará continuamente en bucle. Contamos con un fichero MP3 en el proyecto que podemos utilizar como música. Para ello:</p>
+<blockquote>
+<p><strong><em>TODO <code>C15</code></em></strong></p>
+<ul>
+<li>En <code>setupAudio</code> creamos un objeto <code>SCNAudioSource</code> que lea el MP3, con su propiedad <code>loops</code> activada, y con un volumen de 0.1. </li>
+<li>Ejecutaremos sobre el nodo raiz de la escena una acción de tipo <code>SCNAction.playAudio</code> que reproduzca la fuente de audio anterior. </li>
+</ul>
+</blockquote>
+<p>Con esto la música deberá sonar continuamente en bucle.</p>
+<h3 id="efectos-de-sonido">Efectos de sonido<a class="headerlink" href="#efectos-de-sonido" title="Permanent link">&para;</a></h3>
+<p>A diferencia de la música de fondo, los efectos de sonido es importante que se reproduzcan de forma inmediata, sin producirse ningún retraso. Por ejemplo, debemos evitar ver una explosión y oirla 0.5 segundos después, pero la carga del sonido la primera vez producirá siempre un pequeño retardo. Por eso es importante hacer previamente una precarga de los sonidos en el videojuego. Haremos lo siguiente:</p>
+<blockquote>
+<p><strong><em>TODO <code>C16</code></em></strong></p>
+<ul>
+<li>En <code>setupAudio</code> creamos un <code>SCNAudioSource</code> con <code>bomb.wav</code> y con volumen 10.0, precargamos el sonido con su método <code>load</code>, y asignamos el sonido precargado a la propiedad <code>soundExplosion</code>.</li>
+</ul>
+<p><strong><em>TODO <code>C17</code></em></strong></p>
+<ul>
+<li>En <code>showExplosion</code> reproduciremos el sonido <code>soundExplosion</code> sobre el nodo del asteroide que ha explotado. </li>
+<li>Esto podemos hacerlo ejecutando una acción sobre el nodo correspondiente, pero debemos tener en cuenta que dicho nodo es eliminado de la escena justo en ese momento, por lo que la acción quedaría interrumpida. Solución propuesta: </li>
+<li>Crea un nodo vacío en la posición donde estaba el asteroide que va a explorar.</li>
+<li>Reproduce el sonido mediante una acción sobre dicho nodo</li>
+<li>Tras completarse la acción de reproducción de sonido, ejecuta una acción que elimine al nodo de su padre (utiliza el mecanismo adecuado para reproducir las dos acciones en <strong>secuencia</strong>).</li>
+</ul>
+</blockquote>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Pie">
+        
+          <a href="p2b.html" title="Ácción" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Anterior
+                </span>
+                Ácción
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="p2d.html" title="Estados" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Siguiente
+                </span>
+                Estados
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="assets/javascripts/vendor.d710d30a.min.js"></script>
+      <script src="assets/javascripts/bundle.b39636ac.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copiar al portapapeles", "clipboard.copied": "Copiado al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados"}</script>
+      
+      <script>
+        app = initialize({
+          base: ".",
+          features: [],
+          search: Object.assign({
+            worker: "assets/javascripts/worker/search.a68abb33.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

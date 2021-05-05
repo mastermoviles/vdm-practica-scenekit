@@ -1,0 +1,661 @@
+
+
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.4.0">
+    
+    
+      
+        <title>Ácción - Práctica extra: SceneKit</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.fe0cca5b.min.css">
+      
+        <link rel="stylesheet" href="assets/stylesheets/palette.a46bcfb3.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#3f51b5">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="stylesheets/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#entrada-del-usuario" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Cabecera">
+    <a href="." title="Práctica extra: SceneKit" class="md-header-nav__button md-logo" aria-label="Práctica extra: SceneKit">
+      
+  <img src="images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Práctica extra: SceneKit
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Ácción
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Limpiar" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Práctica extra: SceneKit" class="md-nav__button md-logo" aria-label="Práctica extra: SceneKit">
+      
+  <img src="images/logo.png" alt="logo">
+
+    </a>
+    Práctica extra: SceneKit
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="index.html" title="Introducción" class="md-nav__link">
+      Introducción
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="p2a.html" title="Escena" class="md-nav__link">
+      Escena
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Ácción
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="p2b.html" title="Ácción" class="md-nav__link md-nav__link--active">
+      Ácción
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#entrada-del-usuario" class="md-nav__link">
+    Entrada del usuario
+  </a>
+  
+    <nav class="md-nav" aria-label="Entrada del usuario">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tap-en-la-pantalla-tactil" class="md-nav__link">
+    Tap en la pantalla táctil
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control-por-movimiento" class="md-nav__link">
+    Control por movimiento
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#disparos" class="md-nav__link">
+    Disparos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#movimiento-de-la-nave" class="md-nav__link">
+    Movimiento de la nave
+  </a>
+  
+    <nav class="md-nav" aria-label="Movimiento de la nave">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#calculo-de-los-limites-visibles-de-la-escena" class="md-nav__link">
+    Cálculo de los límites visibles de la escena
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calculo-del-delta-time-en-el-ciclo-del-juego" class="md-nav__link">
+    Cálculo del delta time en el ciclo del juego.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#movimiento-de-la-nave_1" class="md-nav__link">
+    Movimiento de la nave
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="p2c.html" title="Enemigos" class="md-nav__link">
+      Enemigos
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="p2d.html" title="Estados" class="md-nav__link">
+      Estados
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#entrada-del-usuario" class="md-nav__link">
+    Entrada del usuario
+  </a>
+  
+    <nav class="md-nav" aria-label="Entrada del usuario">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tap-en-la-pantalla-tactil" class="md-nav__link">
+    Tap en la pantalla táctil
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control-por-movimiento" class="md-nav__link">
+    Control por movimiento
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#disparos" class="md-nav__link">
+    Disparos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#movimiento-de-la-nave" class="md-nav__link">
+    Movimiento de la nave
+  </a>
+  
+    <nav class="md-nav" aria-label="Movimiento de la nave">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#calculo-de-los-limites-visibles-de-la-escena" class="md-nav__link">
+    Cálculo de los límites visibles de la escena
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calculo-del-delta-time-en-el-ciclo-del-juego" class="md-nav__link">
+    Cálculo del delta time en el ciclo del juego.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#movimiento-de-la-nave_1" class="md-nav__link">
+    Movimiento de la nave
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                  <h1>Ácción</h1>
+                
+                <p>Una vez añadidos los componentes de la escena, vamos a poner el juego en movimiento. En este bloque veremos lo siguiente:</p>
+<ul>
+<li>Lectura de la <strong>entrada del usuario</strong><ul>
+<li>Tap en pantalla táctil (para disparar)</li>
+<li>Sensores de movimiento (para mover la nave de izquierda a derecha)</li>
+</ul>
+</li>
+<li><strong>Acciones</strong> (<code>SCNAction</code>) para programar el comportamiento de los disparos</li>
+<li><strong>Ciclo del juego</strong> para mover la nave en función de la inclinación del móvil</li>
+</ul>
+<h2 id="entrada-del-usuario">Entrada del usuario<a class="headerlink" href="#entrada-del-usuario" title="Permanent link">&para;</a></h2>
+<p>En primer lugar vamos a realizar la lectura de la entrada del usuario. Posteriormente, utilizaremos esta entrada para mover los elementos de la escena. </p>
+<h3 id="tap-en-la-pantalla-tactil"><em>Tap</em> en la pantalla táctil<a class="headerlink" href="#tap-en-la-pantalla-tactil" title="Permanent link">&para;</a></h3>
+<p>Para la lectura de los <em>taps</em> en la pantalla táctil, utilizaremos los componentes de <em>UIKit</em> orientados al reconocimiento de gestos. </p>
+<blockquote>
+<p><strong><em>TODO <code>B01</code></em></strong></p>
+<ul>
+<li>En el método <code>startTapRecognition(inView:)</code>, crearemos un objeto de tipo <code>UITapGestureRecognition</code>, que cuando se produzca el evento de <em>tap</em> en pantalla, llame al método <code>handleTap(:)</code>. Para ello, los <em>gesture recognizers</em> cuentan con <a href="https://developer.apple.com/documentation/uikit/uigesturerecognizer/1624211-init">el constructor <code>init(target:action:)</code></a>. Recuerda también que puedes utilizar la directiva <code>#selector()</code> para especificar un <em>selector</em> que identifique el método al que queremos llamar.</li>
+<li>Añadiremos el <code>UITapGestureRecognition</code> a la vista (que nos llega como parámetro). Puedes ver la forma de hacer esto en la <a href="https://developer.apple.com/documentation/uikit/uiview/1622496-addgesturerecognizer">documentación de <code>UIView</code></a>.</li>
+</ul>
+</blockquote>
+<p>Podemos ver que el método <code>handleTap(:)</code>ya está implementado, y que lo único que hace es llamar al método <code>shot()</code> que de momento está vacío. En el siguiente apartado lo completaremos para implementar los disparos.</p>
+<h3 id="control-por-movimiento">Control por movimiento<a class="headerlink" href="#control-por-movimiento" title="Permanent link">&para;</a></h3>
+<p>Vamos a utilizar los sensores de orientación del dispositivo para implementar control por movimiento. </p>
+<blockquote>
+<p><strong><em>TODO <code>B02</code></em></strong></p>
+<ul>
+<li>En <code>startMotionUpdates()</code> programaremos lecturas de la orientación del dispositivo (<em>device motion updates</em>) utilizando Core Motion. Utilizaremos los ángulos <em>pitch</em> y <em>roll</em> del dispositivo para mover ligeramente la orientación de la cámara, y para cambiar la velocidad de la nave (almacenada en el campo <code>velocity</code>) según giramos el dispositivo. Puedes utilizar el siguiente código para conseguir estas funcionalidades. </li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="p">(</span><span class="kc">self</span><span class="p">.</span><span class="n">motion</span><span class="p">.</span><span class="n">isDeviceMotionAvailable</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kc">self</span><span class="p">.</span><span class="n">motion</span><span class="p">.</span><span class="n">deviceMotionUpdateInterval</span> <span class="p">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="mf">60.0</span>
+    <span class="kc">self</span><span class="p">.</span><span class="n">motion</span><span class="p">.</span><span class="n">startDeviceMotionUpdates</span><span class="p">(</span>
+            <span class="n">to</span><span class="p">:</span> <span class="n">OperationQueue</span><span class="p">.</span><span class="n">main</span><span class="p">,</span> 
+            <span class="n">withHandler</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="n">deviceMotion</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> 
+                                          <span class="p">-&gt;</span> <span class="nb">Void</span> <span class="k">in</span>
+
+        <span class="k">if</span> <span class="kd">let</span> <span class="nv">roll</span> <span class="p">=</span> <span class="n">deviceMotion</span><span class="p">?.</span><span class="n">attitude</span><span class="p">.</span><span class="n">roll</span><span class="p">,</span> 
+            <span class="kd">let</span> <span class="nv">pitch</span> <span class="p">=</span> <span class="n">deviceMotion</span><span class="p">?.</span><span class="n">attitude</span><span class="p">.</span><span class="n">pitch</span> <span class="p">{</span>
+            <span class="kc">self</span><span class="p">.</span><span class="n">velocity</span> <span class="p">=</span> <span class="nb">Float</span><span class="p">(</span><span class="n">roll</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="kd">let</span> <span class="nv">cameraNode</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">cameraNode</span><span class="p">,</span> 
+                <span class="kd">let</span> <span class="nv">euler</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">cameraEulerAngle</span> <span class="p">{</span>
+                <span class="n">cameraNode</span><span class="p">.</span><span class="n">eulerAngles</span><span class="p">.</span><span class="n">z</span> <span class="p">=</span> 
+                   <span class="n">euler</span><span class="p">.</span><span class="n">z</span> <span class="o">-</span> <span class="nb">Float</span><span class="p">(</span><span class="n">roll</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.1</span>
+                <span class="n">cameraNode</span><span class="p">.</span><span class="n">eulerAngles</span><span class="p">.</span><span class="n">x</span> <span class="p">=</span> 
+                   <span class="n">euler</span><span class="p">.</span><span class="n">x</span> <span class="o">-</span> <span class="nb">Float</span><span class="p">(</span><span class="n">pitch</span> <span class="o">-</span> <span class="mf">0.75</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.1</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div>
+
+</blockquote>
+<p>Podemos ver que en el código necesitamos acceder al nodo cámara (<code>self.cameraNode</code>), y también necesitamos tener guardada como referencia la orientación original de la cámara (<code>self.cameraEulerAngle</code>), para hacer el giro de forma relativa a ella. </p>
+<blockquote>
+<p><strong><em>TODO <code>B03</code></em></strong></p>
+<ul>
+<li>Inicializar los campos <code>self.cameraNode</code> y <code>self.cameraEulerAngle</code>) en el método <code>viewDidLoad()</code>. Recuerda que en SceneKit el nodo raíz de la escena se encuentra en la propiedad <code>rootNode</code> de la clase <code>SCNScene</code>. A partir de dicho nodo raíz, podremos buscar los hijos a partir de su nombre.</li>
+</ul>
+</blockquote>
+<p>Una vez hecho esto, si probamos el juego veremos que la cámara gira levemente cuando giramos el dispositivo.</p>
+<blockquote>
+<p><strong><em>TODO <code>B04</code></em></strong></p>
+<ul>
+<li>De la misma forma, también deberemos obtener el nodo con la nave (<em>"ship"</em>) y almacenarlo en el campo <code>self.ship</code>, para posteriormente poder mover la nave, o lanzar disparos desde ella.</li>
+</ul>
+</blockquote>
+<h2 id="disparos">Disparos<a class="headerlink" href="#disparos" title="Permanent link">&para;</a></h2>
+<p>Vamos a implementar los disparos, y programaremos su comportamiento utilizando acciones (<code>SCNAction</code>). </p>
+<blockquote>
+<p><strong><em>TODO <code>B05</code></em></strong>. Dentro del método <code>shot()</code>, haremos lo siguiente:</p>
+<ul>
+<li>Definimos la apariencia de la bala</li>
+<li>Creamos una forma de tipo esfera (<code>SCNSphere</code>) con radio 1.0</li>
+<li>Vamos a darle a la esfera un material que emita luz amarilla. Para ello, le asignamos en su material princpal <code>firstMaterial</code>, tanto en <code>diffuse</code> como en <code>emission</code> (en la propiedad <code>contents</code>) el color (<code>UIColor</code>) con RGB (0.8, 0.7, 0.2).</li>
+<li>Creamos la bala como un nodo (<code>SCNNode</code>) con la geometría de esfera anterior, dándole nombre <em>"bullet"</em>, y ubicándola en la misma posicion que la nave.</li>
+<li>Añadimos el nodo a la escena.</li>
+<li>Programamos una acción que haga que la bala se mueva</li>
+<li>Definimos una accion que mueva la bala 150 unidades negativas en el eje Z (durante 1 segundo), y tras ello elimine la bala de la escena. Mira la <a href="https://developer.apple.com/documentation/scenekit/scnaction">documentación de <code>SCNAction</code></a>, para ver cómo definir cada una de estas dos acciones, y cómo encadenarlas en una secuencia. </li>
+<li>Ejecutamos la accion sobre la bala.</li>
+</ul>
+</blockquote>
+<p>Con esto, ya podemos probar a disparar haciendo <em>tap</em> en pantalla.</p>
+<h2 id="movimiento-de-la-nave">Movimiento de la nave<a class="headerlink" href="#movimiento-de-la-nave" title="Permanent link">&para;</a></h2>
+<p>Para el movimiento de la nave, haremos que en cada iteración del juego la nave se mueva según el valor de <code>self.velocity</code> (recordemos que actualizaremos esta variable en cada momento a partir del giro del dispositivo). Para ello, haremos que en el ciclo del juego la posición de la nave se modifique en función del <em>delta time</em> (tiempo transcurrido desde la iteración anterior) y de la velocidad actual (leída de la orientación del dispositivo). Otra cuestión a tener en cuenta, es que para mover la nave deberemos conocer cuáles son los límites de la pantalla, para evitar que se salga de la zona visible. Vamos a continuación a abordar cada uno de estos problemas.</p>
+<h3 id="calculo-de-los-limites-visibles-de-la-escena">Cálculo de los <strong>límites visibles de la escena</strong><a class="headerlink" href="#calculo-de-los-limites-visibles-de-la-escena" title="Permanent link">&para;</a></h3>
+<p>En primer lugar determinaremos cuáles son los límites de la escena en los que podremos ubicar los objetos sin que salgan de la zona visible. Como tanto la nave, como nuestros disparos y asteroides siempre se moverán dentro de un mismo plazo (plano <code>XZ</code>, es decir,en todos los casos <code>y=0</code>), nos bastará con definir un rectángulo dentro de dicho plano <code>XZ</code> que defina los límites del éste donde se desarrollará la acción.</p>
+<blockquote>
+<p><strong><em>TODO <code>B06</code></em></strong></p>
+<ul>
+<li>En el método <code>setupLimits</code>, definiremos un <code>CGRect</code> con la zona de la escena 3D (dentro del plano XZ) donde se desarrollará la acción, y lo asignaremos a <code>self.limits</code>. </li>
+<li>La anchura del rectángulo corresponderá al eje <code>X</code>, y la altura al eje <code>Z</code>. </li>
+<li>Podemos utilizar el siguiente código para calcular los límites:</li>
+</ul>
+<p><div class="highlight"><pre><span></span><code><span class="kd">let</span> <span class="nv">projectedOrigin</span> <span class="p">=</span> <span class="n">view</span><span class="p">.</span><span class="n">projectPoint</span><span class="p">(</span><span class="n">SCNVector3Zero</span><span class="p">)</span>
+<span class="kd">let</span> <span class="nv">unprojectedLeft</span> <span class="p">=</span> <span class="n">view</span><span class="p">.</span><span class="n">unprojectPoint</span><span class="p">(</span>
+        <span class="n">SCNVector3Make</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> 
+                       <span class="n">projectedOrigin</span><span class="p">.</span><span class="n">y</span><span class="p">,</span> 
+                       <span class="n">projectedOrigin</span><span class="p">.</span><span class="n">z</span><span class="p">))</span>
+<span class="kd">let</span> <span class="nv">halfWidth</span> <span class="p">=</span> <span class="n">CGFloat</span><span class="p">(</span><span class="bp">abs</span><span class="p">(</span><span class="n">unprojectedLeft</span><span class="p">.</span><span class="n">x</span><span class="p">))</span>
+<span class="kc">self</span><span class="p">.</span><span class="n">limits</span> <span class="p">=</span> <span class="bp">CGRect</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">halfWidth</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="o">-</span><span class="mi">150</span><span class="p">,</span> 
+                     <span class="n">width</span><span class="p">:</span> <span class="n">halfWidth</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> 
+                     <span class="n">height</span><span class="p">:</span> <span class="mi">200</span><span class="p">)</span>
+</code></pre></div>
+</p>
+</blockquote>
+<p><strong>Aclaraciones sobre el código anterior:</strong>
+- Dado que la nave se situará en el eje <code>X (Y=0, Z=0)</code>, proyectamos el punto <code>(0, 0, 0)</code> para averiguar sus coordenadas 2D proyectadas en la pantalla.
+- Una vez obtenidas las coordenadas, desproyectamos las mismas coordenadas pero con <code>X=0</code> (lado izquierdo de la pantalla), para obtener el punto en la escena que corresponde a ese límite.
+- Al estar mirando la cámara a <code>(0, 0, 0)</code> habrá simetría, por lo que ya sabemos la coordenada <code>X</code> mínima y máxima.
+- El campo visual de la cámara en la vertical por defecto es fijo. Es decir, siempre veremos el mismo contenido de la escena en la vertical independientemente del dispositivo (a no ser que lo cambiemos para hacer que la referencia sea el horizontal). De esta forma, sabemos de antemano los límites de la escena que veremos en la coordenada <code>Z</code>, por lo que podemos establecerlos manualmente (de <code>-150</code> a <code>50</code>).</p>
+<p><strong>Forma alternativa de calcular los límites</strong>:</p>
+<ul>
+<li>Podríamos también utilizar los parámetros de la cámara y el tamaño de pantalla para calcular los límites. </li>
+<li>A partir de las dimensiones de la vista, podemos calcular su relación de aspecto (ancho / alto). </li>
+<li>Conocimiendo el campo visual de la cámara en vertical, y la relación de aspecto, podríamos conocer el campo visual horizontal. </li>
+<li>Con esta información, podríamos también determinar los límites del escenario en la horizontal y vertical.</li>
+</ul>
+<h3 id="calculo-del-delta-time-en-el-ciclo-del-juego">Cálculo del <em>delta time</em> en el <strong>ciclo del juego</strong>.<a class="headerlink" href="#calculo-del-delta-time-en-el-ciclo-del-juego" title="Permanent link">&para;</a></h3>
+<p>En <em>SceneKit</em>, el método equivalente al <em>update</em> que es llamado en cada iteración del ciclo del juego es <code>renderer(_:,updateAtTime:)</code>, que se implementa en el delegado del <em>renderer</em> de la escena <code>SCNSceneRendererDelegate</code> (recordemos que en nuestro caso el <em>renderer</em> es la propia clase <code>SCNView</code>). Para implementarlo haremos lo siguiente:</p>
+<blockquote>
+<p><strong><em>TODO <code>B07</code></em></strong></p>
+<ul>
+<li>Implementar el protocolo <code>SCNSceneRendererDelegate</code> en nuestra clase.</li>
+</ul>
+<p><strong><em>TODO <code>B08</code></em></strong></p>
+<ul>
+<li>En la inicialización de la vista (<code>setupView</code>) asignaremos nuestra clase (<code>self</code>) como delegado del renderer de la escena (<code>view</code>)</li>
+<li>En nuestro <em>renderer</em> de la escena (<code>view</code>), activamos la propiedad <code>isPlaying</code> para que así comience a reproducirse el ciclo del juego. Al activar esta propiedad se empezará a llamar en cada ciclo de reloj al método <code>renderer(_:,updateAtTime:)</code>.</li>
+</ul>
+</blockquote>
+<p>En <code>renderer(_:,updateAtTime:)</code> podemos ver que nos llega el tiempo de reloj en que se realiza la actualización, pero no nos dice el tiempo transcurrido desde la iteración anterior (<em>delta time</em>), esto deberemos calcularlo nosotros. En la clase hemos introducido un campo <code>previousUpdateTime</code> con este fin.</p>
+<blockquote>
+<p><strong><em>TODO <code>B09</code></em></strong></p>
+<ul>
+<li>En <code>renderer(_:,updateAtTime:)</code> calculamos el <em>delta time</em>, tomando como referencia el tiempo de actualización actual y el de la iteración anterior. Con el siguiente código, podemos conseguir que la primera vez que se llame, en la que <code>previousUpdateTime</code> todavía no tendrá valor asignado, se tome el tiempo actual como referencia:</li>
+</ul>
+<p><div class="highlight"><pre><span></span><code><span class="kd">let</span> <span class="nv">deltaTime</span> <span class="p">=</span> <span class="n">time</span> <span class="o">-</span> <span class="p">(</span><span class="n">previousUpdateTime</span> <span class="p">??</span> <span class="n">time</span><span class="p">)</span>
+<span class="n">previousUpdateTime</span> <span class="p">=</span> <span class="n">time</span>
+</code></pre></div>
+</p>
+</blockquote>
+<h3 id="movimiento-de-la-nave_1">Movimiento de la nave<a class="headerlink" href="#movimiento-de-la-nave_1" title="Permanent link">&para;</a></h3>
+<p>Por último, a partir de la velocidad de la nave en el movimiento lateral en el eje <code>X</code> (obtenida a partir del giro que nos da <em>Core Motion</em>) y del <em>delta time</em>, actualizaremos la posición de la nave.</p>
+<blockquote>
+<p><strong><em>TODO <code>B10</code></em></strong></p>
+<ul>
+<li>Actualizamos la posición <code>X</code> de la nave aplicando la formula <code>posNueva = posAnterior + velocidad * tiempo</code>. Conociendo la velocidad a la que debe ir la nave en <code>X</code>, y el tiempo transcurrido (<em>delta time</em>) es sencillo actualizar la posición. </li>
+<li>Dado que la velocidad la hemos obtenido de un valor de giro dado en radianes, estará en relación con la inclinación del móvil, pero tendrá un valor bastante bajo. Por ello, en la actualización de la posición es conveniente multiplicarla por un factor que nos permita aumentarla (por ejemplo, un factor de 200.0 puede resultar adecuado.)</li>
+<li>Una vez calculada la nueva posición, debemos asegurarnos de que no se salga de los límites de la pantalla (<code>limits.minX</code> y <code>limits.maxX</code> calculados anteriormente). En caso de salirse, corregiremos la posición.</li>
+<li>Para mejorar la experiencia, podemos hacer que al girar el móvil la nave también gire hacia uno u otro lado, lo que hará que sea más realista el movimiento de desplazamiento lateral. Para ello, podemos modificar el ángulo Z (<code>eulerAngles</code>) de la nave justo en el sentido opuesto de lo que nos indica <code>velocity</code> (que recordemos que viene del giro del dispositivo en radianes).</li>
+</ul>
+</blockquote>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Pie">
+        
+          <a href="p2a.html" title="Escena" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Anterior
+                </span>
+                Escena
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="p2c.html" title="Enemigos" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Siguiente
+                </span>
+                Enemigos
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="assets/javascripts/vendor.d710d30a.min.js"></script>
+      <script src="assets/javascripts/bundle.b39636ac.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copiar al portapapeles", "clipboard.copied": "Copiado al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados"}</script>
+      
+      <script>
+        app = initialize({
+          base: ".",
+          features: [],
+          search: Object.assign({
+            worker: "assets/javascripts/worker/search.a68abb33.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>
